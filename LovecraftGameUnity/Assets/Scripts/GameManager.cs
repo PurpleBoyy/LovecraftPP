@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public GameObject Canves;
+    public Char currentChar;
     public bool canCharPass;
 
     private void Awake()

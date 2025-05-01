@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 501, y: 202.99997}
+  m_AnchoredPosition: {x: -523, y: 426}
   m_SizeDelta: {x: 500, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1079744242877820430
@@ -186,7 +186,8 @@ MonoBehaviour:
   StampImg: {fileID: 4892773489416197006}
   SmallPassport: {fileID: 5514015858548000497}
   BigPassport: {fileID: 539914363622515950}
-  stampPass: 0
+  charScrpit: {fileID: 0}
+  isDocumentValid: 0
 --- !u!1 &4892773489416197006
 GameObject:
   m_ObjectHideFlags: 0

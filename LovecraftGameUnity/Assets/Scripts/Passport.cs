@@ -7,16 +7,37 @@ public class Passport : MonoBehaviour
     public GameObject SmallPassport;
     public GameObject BigPassport;
     public Char charScrpit;
+
+    public bool isDocumentValid;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        SpawnPassport();
+       
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void SpawnPassport()
+    {
+        int passportType = Random.Range(0, 2);
+
+        if (passportType == 1)
+        {
+            isDocumentValid = true;
+            BigPassport.GetComponent<Image>().color = Color.cyan;
+            CutSceneManager.Instance.isAllowed = true;
+        }
+        else
+        {
+            isDocumentValid = false;
+            BigPassport.GetComponent<Image>().color = Color.magenta;
+            CutSceneManager.Instance.isAllowed = false;
+        }
     }
 
     public void OpenPassport()

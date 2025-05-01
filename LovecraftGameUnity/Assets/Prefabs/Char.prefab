@@ -114,7 +114,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Passport: {fileID: 153126444069717243}
-  passportSpawn: {fileID: 0}
   anim: {fileID: 7036389697981895207}
   Stamped: 0
 --- !u!114 &6489581279892841546
@@ -173,6 +172,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8057069478357440081}
+        m_TargetAssemblyTypeName: Char, Assembly-CSharp
+        m_MethodName: RecievePassport
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &3685589019754250249
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -187,12 +198,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3532462713407456498, guid: 4470918b4a3a9d842bd2240bd3e6cfa3, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5181072151330902257, guid: 4470918b4a3a9d842bd2240bd3e6cfa3, type: 3}
       propertyPath: charScrpit
       value: 
       objectReference: {fileID: 8057069478357440081}
+    - target: {fileID: 5514015858548000497, guid: 4470918b4a3a9d842bd2240bd3e6cfa3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8340122231642021779, guid: 4470918b4a3a9d842bd2240bd3e6cfa3, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
