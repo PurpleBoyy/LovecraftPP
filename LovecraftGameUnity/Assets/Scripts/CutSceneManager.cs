@@ -15,8 +15,6 @@ public class CutSceneManager : MonoBehaviour
     public bool isAllowed;
     public bool dialogueOver;
     public bool dialoguePause;
-    public int rejPassportPause;
-    public int allowPassportPause;
     public int lineIndex;
     public int charLineIndex;
 
@@ -45,14 +43,13 @@ public class CutSceneManager : MonoBehaviour
     {
         DialogueBox.SetActive(true);
         ContinueDialogue();
+        Debug.Log("startDialogue");
     }
 
     public void ResetDialogue()
     {
         dialogueOver = false;
         dialoguePause = false;
-        rejPassportPause = 2;
-        allowPassportPause = 1;
         charLineIndex = 0;
         lineIndex = 0;
     }
@@ -82,7 +79,7 @@ public class CutSceneManager : MonoBehaviour
                 GameManager.Instance.currentChar.Walk();
             }
 
-            if (allowPassportPause + 1 == lineIndex && dialoguePause == false)
+            if (AllowedLines[0].pauseIndex + 1 == lineIndex && dialoguePause == false)
             {
                 DialogueBox.SetActive(false);
                 lineIndex--;
@@ -115,7 +112,7 @@ public class CutSceneManager : MonoBehaviour
                 GameManager.Instance.currentChar.Walk();
             }
 
-            if (rejPassportPause + 1 == lineIndex && dialoguePause == false)
+            if (RejectedLines[0].pauseIndex + 1 == lineIndex && dialoguePause == false)
             {
                 DialogueBox.SetActive(false);
                 lineIndex--;

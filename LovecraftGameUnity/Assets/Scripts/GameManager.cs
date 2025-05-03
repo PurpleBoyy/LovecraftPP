@@ -9,7 +9,10 @@ public class GameManager : MonoBehaviour
     public GameObject Canves;
     public Char currentChar;
     public bool canCharPass;
-
+    public bool isPassportStamped;
+    public bool isPassportValid;
+    public int playerSavings;
+    public int invalidEntries;
     private void Awake()
     {
         Instance = this;

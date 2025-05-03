@@ -31,12 +31,14 @@ public class Passport : MonoBehaviour
             isDocumentValid = true;
             BigPassport.GetComponent<Image>().color = Color.cyan;
             CutSceneManager.Instance.isAllowed = true;
+            GameManager.Instance.isPassportValid = true;
         }
         else
         {
             isDocumentValid = false;
             BigPassport.GetComponent<Image>().color = Color.magenta;
             CutSceneManager.Instance.isAllowed = false;
+            GameManager.Instance.isPassportValid = false;
         }
     }
 
@@ -60,5 +62,7 @@ public class Passport : MonoBehaviour
             StampImg.GetComponent<Image>().color = Color.red;
             charScrpit.Stamped = 1;
         }
+
+        GameManager.Instance.isPassportStamped = true;
     }
 }

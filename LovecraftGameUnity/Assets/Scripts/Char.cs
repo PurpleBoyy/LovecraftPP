@@ -35,32 +35,62 @@ public class Char : MonoBehaviour
 
     public void RecievePassport()
     {
-        Passport.SetActive(false);
-        Passport.transform.parent = gameObject.transform;
-        CutSceneManager.Instance.DialogueBox.SetActive(true);
-        //CutSceneManager.Instance.charLineIndex--;
-        CutSceneManager.Instance.ContinueDialogue();
+        if (GameManager.Instance.isPassportStamped == true)
+        {
+            Passport.SetActive(false);
+            Passport.transform.parent = gameObject.transform;
+            CutSceneManager.Instance.DialogueBox.SetActive(true);
+
+            if(GameManager.Instance.isPassportValid == true && GameManager.Instance.canCharPass == false)// Check if a valid passport is denied
+            {
+                CutSceneManager.Instance.isAllowed = false;
+                CutSceneManager.Instance.lineIndex = CutSceneManager.Instance.RejectedLines[0].pauseIndex;
+                CutSceneManager.Instance.charLineIndex = 0;
+                GameManager.Instance.invalidEntries++;
+            }
+            else if (GameManager.Instance.isPassportValid == false && GameManager.Instance.canCharPass == true)// Check if a invalid passport is accepted
+            {
+                CutSceneManager.Instance.isAllowed = true;
+                CutSceneManager.Instance.lineIndex = CutSceneManager.Instance.AllowedLines[0].pauseIndex;
+                CutSceneManager.Instance.charLineIndex = 0;
+                GameManager.Instance.invalidEntries++;
+            }
+
+            CutSceneManager.Instance.ContinueDialogue();
+        }
     }
 
     public void Walk()
     {
-        if (CutSceneManager.Instance.dialogueOver == true)
+        if (CutSceneManager.Instance.dialogueOver == true && GameManager.Instance.isPassportStamped == true)
         {
             if (Stamped == 1)
             {
-                anim.Play("CharWalkBack");
-                Passport.SetActive(false);
-                Passport.transform.parent = gameObject.transform;
-                StartCoroutine(SpawnCharCor());
+                WalkCheck("CharWalkBack");
             }
             else if (Stamped == 2)
             {
-                anim.Play("CharWalkForward");
-                Passport.SetActive(false);
-                Passport.transform.parent = gameObject.transform;
-                StartCoroutine(SpawnCharCor());
+                WalkCheck("CharWalkForward");
             }
         }
+    }
+
+    void WalkCheck(string walkDir)
+    {
+        anim.Play(walkDir);
+        Passport.SetActive(false);
+        Passport.transform.parent = gameObject.transform;
+
+        if (DaysManager.Instance.noOfChecks < 1)
+        {
+            StartCoroutine(SpawnCharCor());
+            DaysManager.Instance.noOfChecks++;
+        }
+        else
+        {
+            DaysManager.Instance.EndDay();
+        }
+
     }
 
     IEnumerator SpawnCharCor()
@@ -68,6 +98,7 @@ public class Char : MonoBehaviour
         yield return new WaitForSeconds(3);
         CharManager.Instance.SpawnChar();
         CutSceneManager.Instance.ResetDialogue();
+        GameManager.Instance.isPassportStamped = false;
         Destroy(gameObject);
     }
 }
