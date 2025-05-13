@@ -1,19 +1,31 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
-public class Passport : MonoBehaviour
+public class Passport : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
 
     public GameObject StampImg;
     public GameObject SmallPassport;
     public GameObject BigPassport;
+    public GameObject Symbols;
     public Char charScrpit;
 
+    public int rand;
+
     public bool isDocumentValid;
+    Vector3 mousePos;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         SpawnPassport();
-       
+
+        rand = Random.Range(0, 101);
+
+        if (rand > 0)
+        {
+            Symbols.SetActive(true);
+            Debug.Log("CULT");
+        }
     }
 
     // Update is called once per frame
@@ -40,6 +52,19 @@ public class Passport : MonoBehaviour
             CutSceneManager.Instance.isAllowed = false;
             GameManager.Instance.isPassportValid = false;
         }
+
+    }
+
+    public void SetSymbols()
+    {
+        if (rand > 0)
+        {
+            for (int i = 0; i < GameManager.Instance.symb.Count; i++)
+            {
+                GameManager.Instance.symb[i].Light = GameManager.Instance.Light;
+                Debug.Log("SETLIGHT" + i);
+            }
+        }
     }
 
     public void OpenPassport()
@@ -65,4 +90,22 @@ public class Passport : MonoBehaviour
 
         GameManager.Instance.isPassportStamped = true;
     }
+
+
+    #region Drag
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        mousePos = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + mousePos;
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+
+    }
+    #endregion
 }

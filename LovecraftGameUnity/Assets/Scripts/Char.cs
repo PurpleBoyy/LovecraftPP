@@ -31,6 +31,7 @@ public class Char : MonoBehaviour
         Passport.transform.parent = GameManager.Instance.Canves.transform;
         Passport.transform.position = CharManager.Instance.PassportSpawn.position;
         Passport.transform.localScale = new Vector3(1, 1, 1);
+        Passport.GetComponent<Passport>().SetSymbols();
     }
 
     public void RecievePassport()
@@ -57,6 +58,8 @@ public class Char : MonoBehaviour
             }
 
             CutSceneManager.Instance.ContinueDialogue();
+
+            GameManager.Instance.symb.RemoveRange(0, GameManager.Instance.symb.Count);
         }
     }
 

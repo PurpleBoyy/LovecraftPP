@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 
 public class GameManager : MonoBehaviour
@@ -7,6 +8,10 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public GameObject Canves;
+    public GameObject Light;
+
+    public List<CultSymbol> symb = new List<CultSymbol>();
+
     public Char currentChar;
     public bool canCharPass;
     public bool isPassportStamped;
@@ -27,7 +32,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void AllowStamp()
@@ -40,5 +45,24 @@ public class GameManager : MonoBehaviour
         canCharPass = false;
     }
 
+    public void LightSwitch()
+    {
+        if (Light.activeSelf)
+        {
+            Light.SetActive(false);
+        }
+        else
+        {
+            Light.SetActive(true);
+
+            if(symb.Count > 0)
+            {
+                for (int i = 0; i < symb.Count; i++)
+                {
+                    symb[i].Light = Light;
+                }
+            }
+        }
+    }
 
 }
