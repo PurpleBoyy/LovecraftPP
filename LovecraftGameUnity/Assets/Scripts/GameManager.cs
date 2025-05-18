@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject Canves;
     public GameObject Light;
+    public GameObject CheckList;
 
     public List<CultSymbol> symb = new List<CultSymbol>();
 
@@ -65,4 +66,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void CheckListOpen()
+    {
+        CheckList.SetActive(!CheckList.activeSelf);
+    }
 }

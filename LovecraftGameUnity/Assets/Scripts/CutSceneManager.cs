@@ -13,14 +13,18 @@ public class CutSceneManager : MonoBehaviour
     public TextMeshProUGUI dialogueTxt;
     public GameObject DialogueBox;
     public bool isAllowed;
+    public bool PaperworkBad;
     public bool dialogueOver;
-    public bool dialoguePause;
+    public bool isCult;
     public int lineIndex;
-    public int charLineIndex;
+    public int DialougeIndex;
 
     [Header("Lines")]
-    public List<DialogueList> RejectedLines = new List<DialogueList>();
-    public List<DialogueList> AllowedLines = new List<DialogueList>();
+    public List<DialogueClass> StartLines = new List<DialogueClass>();
+    public List<DialogueClass> AllowedLines = new List<DialogueClass>();
+    public List<DialogueClass> RejectedLines = new List<DialogueClass>();
+    public List<DialogueClass> AskSymbols = new List<DialogueClass>();
+    public List<string> CurrentDialouge = new List<string>();
 
     private void Awake()
     {
@@ -42,83 +46,63 @@ public class CutSceneManager : MonoBehaviour
     public void StartDialogue()
     {
         DialogueBox.SetActive(true);
+        DialougeIndex = Random.Range(0, CurrentDialouge.Count);
+        CurrentDialouge = StartLines[DialougeIndex].line;
         ContinueDialogue();
         Debug.Log("startDialogue");
+    }
+
+    public void StartAllowDialogue()
+    {
+        DialogueBox.SetActive(true);
+        DialougeIndex = Random.Range(0, AllowedLines.Count);
+        CurrentDialouge = AllowedLines[DialougeIndex].line;
+        ContinueDialogue();
+    }
+
+    public void StartRejectDialogue()
+    {
+        DialogueBox.SetActive(true);
+        DialougeIndex = Random.Range(0, RejectedLines.Count);
+        CurrentDialouge = RejectedLines[DialougeIndex].line;
+        ContinueDialogue();
+    }
+
+    public void StartSymbolDialouge()
+    {
+        GameManager.Instance.CheckList.SetActive(false);
+        DialogueBox.SetActive(true);
+        DialougeIndex = Random.Range(0, AskSymbols.Count);
+        CurrentDialouge = AskSymbols[DialougeIndex].line;
+        ContinueDialogue();
     }
 
     public void ResetDialogue()
     {
         dialogueOver = false;
-        dialoguePause = false;
-        charLineIndex = 0;
         lineIndex = 0;
     }
 
     public void ContinueDialogue()
     {
-        if (isAllowed)
+        if (CurrentDialouge.Count > lineIndex)
         {
-            if (lineIndex < AllowedLines[0].Dialogue.Count)
-            {
-              dialogueTxt.text = AllowedLines[0].Dialogue[lineIndex].line[charLineIndex];
 
-               if (charLineIndex < AllowedLines[0].Dialogue[lineIndex].line.Count - 1)
-               {
-                 charLineIndex++;
-               }
-              else
-               {
-                 charLineIndex = 0;
-                 lineIndex++;
-               }
-            }
-            else
-            {
-                dialogueOver = true;
-                DialogueBox.SetActive(false);
-                GameManager.Instance.currentChar.Walk();
-            }
-
-            if (AllowedLines[0].pauseIndex + 1 == lineIndex && dialoguePause == false)
-            {
-                DialogueBox.SetActive(false);
-                lineIndex--;
-                dialoguePause = true;
-            }
-
+            dialogueTxt.text = CurrentDialouge[lineIndex];
+            lineIndex++;
         }
         else
         {
-            if (lineIndex < RejectedLines[0].Dialogue.Count)
-            {
+            DialogueBox.SetActive(false);
+            lineIndex = 0;
 
-               dialogueTxt.text = RejectedLines[0].Dialogue[lineIndex].line[charLineIndex];
-
-               if (charLineIndex < RejectedLines[0].Dialogue[lineIndex].line.Count - 1)
-               {
-                  charLineIndex++;
-               }
-              else
-               {
-                  charLineIndex = 0;
-                  lineIndex++;
-               }
-
-            }
-            else
+            if (GameManager.Instance.isPassportStamped)
             {
                 dialogueOver = true;
-                DialogueBox.SetActive(false);
                 GameManager.Instance.currentChar.Walk();
-            }
-
-            if (RejectedLines[0].pauseIndex + 1 == lineIndex && dialoguePause == false)
-            {
-                DialogueBox.SetActive(false);
-                lineIndex--;
-                dialoguePause = true;
+                Debug.Log("WALkBack");
             }
         }
-
     }
+
 }

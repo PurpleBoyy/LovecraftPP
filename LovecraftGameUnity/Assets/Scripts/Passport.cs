@@ -21,7 +21,7 @@ public class Passport : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
         rand = Random.Range(0, 101);
 
-        if (rand > 0)
+        if (rand > 50)
         {
             Symbols.SetActive(true);
             Debug.Log("CULT");

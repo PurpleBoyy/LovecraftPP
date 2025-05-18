@@ -42,22 +42,30 @@ public class Char : MonoBehaviour
             Passport.transform.parent = gameObject.transform;
             CutSceneManager.Instance.DialogueBox.SetActive(true);
 
-            if(GameManager.Instance.isPassportValid == true && GameManager.Instance.canCharPass == false)// Check if a valid passport is denied
+            if(GameManager.Instance.isPassportValid == true)
             {
-                CutSceneManager.Instance.isAllowed = false;
-                CutSceneManager.Instance.lineIndex = CutSceneManager.Instance.RejectedLines[0].pauseIndex;
-                CutSceneManager.Instance.charLineIndex = 0;
-                GameManager.Instance.invalidEntries++;
+                CutSceneManager.Instance.StartAllowDialogue();
+                Stamped = 2;
+
+                if (GameManager.Instance.canCharPass == false) // Check if a valid passport is denied
+                {
+                    CutSceneManager.Instance.isAllowed = false;
+                    GameManager.Instance.invalidEntries++;
+                }
             }
-            else if (GameManager.Instance.isPassportValid == false && GameManager.Instance.canCharPass == true)// Check if a invalid passport is accepted
+            else if (GameManager.Instance.isPassportValid == false)
             {
-                CutSceneManager.Instance.isAllowed = true;
-                CutSceneManager.Instance.lineIndex = CutSceneManager.Instance.AllowedLines[0].pauseIndex;
-                CutSceneManager.Instance.charLineIndex = 0;
-                GameManager.Instance.invalidEntries++;
+                CutSceneManager.Instance.StartRejectDialogue();
+                Stamped = 1;
+
+                if (GameManager.Instance.canCharPass == true) // Check if a invalid passport is accepted
+                {
+                    CutSceneManager.Instance.isAllowed = true;
+                    GameManager.Instance.invalidEntries++;
+                }
             }
 
-            CutSceneManager.Instance.ContinueDialogue();
+            //CutSceneManager.Instance.ContinueDialogue();
 
             GameManager.Instance.symb.RemoveRange(0, GameManager.Instance.symb.Count);
         }
