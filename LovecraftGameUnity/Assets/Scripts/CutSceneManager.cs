@@ -23,7 +23,8 @@ public class CutSceneManager : MonoBehaviour
     public List<DialogueClass> StartLines = new List<DialogueClass>();
     public List<DialogueClass> AllowedLines = new List<DialogueClass>();
     public List<DialogueClass> RejectedLines = new List<DialogueClass>();
-    public List<DialogueClass> AskSymbols = new List<DialogueClass>();
+    public List<DialogueClass> SymbolsAllow = new List<DialogueClass>();
+    public List<DialogueClass> SymbolsReject = new List<DialogueClass>();
     public List<string> CurrentDialouge = new List<string>();
 
     private void Awake()
@@ -52,6 +53,7 @@ public class CutSceneManager : MonoBehaviour
         Debug.Log("startDialogue");
     }
 
+    #region Passport
     public void StartAllowDialogue()
     {
         DialogueBox.SetActive(true);
@@ -67,15 +69,40 @@ public class CutSceneManager : MonoBehaviour
         CurrentDialouge = RejectedLines[DialougeIndex].line;
         ContinueDialogue();
     }
+    #endregion
 
-    public void StartSymbolDialouge()
+    #region Symbols
+
+    public void StartSymbolsDialouge()
+    {
+        if (GameManager.Instance.isCult)
+        {
+            StartSymbolRejectDialouge();
+        }
+        else
+        {
+            StartSymbolAllowDialouge();
+        }
+    }
+
+    public void StartSymbolAllowDialouge()
     {
         GameManager.Instance.CheckList.SetActive(false);
         DialogueBox.SetActive(true);
-        DialougeIndex = Random.Range(0, AskSymbols.Count);
-        CurrentDialouge = AskSymbols[DialougeIndex].line;
+        DialougeIndex = Random.Range(0, SymbolsAllow.Count);
+        CurrentDialouge = SymbolsAllow[DialougeIndex].line;
         ContinueDialogue();
     }
+
+    public void StartSymbolRejectDialouge()
+    {
+        GameManager.Instance.CheckList.SetActive(false);
+        DialogueBox.SetActive(true);
+        DialougeIndex = Random.Range(0, SymbolsReject.Count);
+        CurrentDialouge = SymbolsReject[DialougeIndex].line;
+        ContinueDialogue();
+    }
+    #endregion
 
     public void ResetDialogue()
     {

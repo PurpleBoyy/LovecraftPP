@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -10,6 +11,7 @@ public class GameManager : MonoBehaviour
     public GameObject Canves;
     public GameObject Light;
     public GameObject CheckList;
+    public Slider insanitySlider;
 
     public List<CultSymbol> symb = new List<CultSymbol>();
 
@@ -17,8 +19,11 @@ public class GameManager : MonoBehaviour
     public bool canCharPass;
     public bool isPassportStamped;
     public bool isPassportValid;
+    public bool isCult;
     public int playerSavings;
     public int invalidEntries;
+    public int cultEntries;
+    public int insanity;
     private void Awake()
     {
         Instance = this;

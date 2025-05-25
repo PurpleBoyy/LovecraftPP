@@ -44,24 +44,46 @@ public class Char : MonoBehaviour
 
             if(GameManager.Instance.isPassportValid == true)
             {
-                CutSceneManager.Instance.StartAllowDialogue();
-                Stamped = 2;
+                
 
                 if (GameManager.Instance.canCharPass == false) // Check if a valid passport is denied
                 {
+                    Stamped = 1;
                     CutSceneManager.Instance.isAllowed = false;
                     GameManager.Instance.invalidEntries++;
+                    CutSceneManager.Instance.StartRejectDialogue();
+                }
+                else
+                {
+                    Stamped = 2;
+                    CutSceneManager.Instance.StartAllowDialogue();
+                    if (GameManager.Instance.isCult)
+                    {
+                        GameManager.Instance.insanity += 10;
+                        GameManager.Instance.insanitySlider.value = GameManager.Instance.insanity;
+                        GameManager.Instance.cultEntries++;
+                    }
                 }
             }
             else if (GameManager.Instance.isPassportValid == false)
             {
-                CutSceneManager.Instance.StartRejectDialogue();
-                Stamped = 1;
-
                 if (GameManager.Instance.canCharPass == true) // Check if a invalid passport is accepted
                 {
+                    Stamped = 2;
                     CutSceneManager.Instance.isAllowed = true;
                     GameManager.Instance.invalidEntries++;
+                    CutSceneManager.Instance.StartAllowDialogue();
+                    if (GameManager.Instance.isCult)
+                    {
+                        GameManager.Instance.insanity += 10;
+                        GameManager.Instance.insanitySlider.value = GameManager.Instance.insanity;
+                        GameManager.Instance.cultEntries++;
+                    }
+                }
+                else
+                {
+                    Stamped = 1;
+                    CutSceneManager.Instance.StartRejectDialogue();
                 }
             }
 

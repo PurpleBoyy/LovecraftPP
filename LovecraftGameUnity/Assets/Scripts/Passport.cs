@@ -24,7 +24,12 @@ public class Passport : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         if (rand > 50)
         {
             Symbols.SetActive(true);
+            GameManager.Instance.isCult = true;
             Debug.Log("CULT");
+        }
+        else
+        {
+            GameManager.Instance.isCult = false;
         }
     }
 

@@ -16,6 +16,7 @@ public class DaysManager : MonoBehaviour
     public TextMeshProUGUI RentTxt;
     public TextMeshProUGUI FoodTxt;
     public TextMeshProUGUI PenaltyTxt;
+    public TextMeshProUGUI CultTxt;
     public Image FoodButtonImg;
     public TextMeshProUGUI TotalTxt;
 
@@ -62,10 +63,12 @@ public class DaysManager : MonoBehaviour
         SalaryTxt.text = "Salary: " + 30;
         FoodTxt.text = "Food: " + 20;
         PenaltyTxt.text = "Penalty: " + GameManager.Instance.invalidEntries *5;
+        CultTxt.text = "Cult Bonus: " + GameManager.Instance.cultEntries *15;
 
         GameManager.Instance.playerSavings += 30; //salary
         GameManager.Instance.playerSavings -= 20; //rent
         GameManager.Instance.playerSavings -= GameManager.Instance.invalidEntries * 5; //penalty
+        GameManager.Instance.playerSavings += GameManager.Instance.cultEntries * 15; //cultMoney
 
         if (food)
         {
@@ -96,6 +99,7 @@ public class DaysManager : MonoBehaviour
             CutSceneManager.Instance.ResetDialogue();
             GameManager.Instance.isPassportStamped = false;
             GameManager.Instance.invalidEntries = 0;
+            GameManager.Instance.cultEntries = 0;
             CharManager.Instance.SpawnChar();
         }
     }
