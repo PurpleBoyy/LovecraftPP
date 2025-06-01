@@ -89,18 +89,35 @@ public class DaysManager : MonoBehaviour
         noOfChecks = 0;
         noOfDays++;
 
-        if(noOfDays >= 3)
+        switch (noOfDays)
+        {
+
+            case 2:
+                EndDayObj.SetActive(false);
+                CutSceneManager.Instance.ResetDialogue();
+                GameManager.Instance.isPassportStamped = false;
+                GameManager.Instance.invalidEntries = 0;
+                GameManager.Instance.cultEntries = 0;
+                CharManager.Instance.SpawnCultChar();
+                break;
+
+            default:
+                EndDayObj.SetActive(false);
+                CutSceneManager.Instance.ResetDialogue();
+                GameManager.Instance.isPassportStamped = false;
+                GameManager.Instance.invalidEntries = 0;
+                GameManager.Instance.cultEntries = 0;
+                CharManager.Instance.SpawnChar();
+                break;
+        }
+
+        if(noOfDays >= 4)
         {
             EndWeekObj.SetActive(true);
         }
         else
         {
-            EndDayObj.SetActive(false);
-            CutSceneManager.Instance.ResetDialogue();
-            GameManager.Instance.isPassportStamped = false;
-            GameManager.Instance.invalidEntries = 0;
-            GameManager.Instance.cultEntries = 0;
-            CharManager.Instance.SpawnChar();
+           
         }
     }
 

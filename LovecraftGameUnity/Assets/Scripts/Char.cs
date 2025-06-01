@@ -6,13 +6,23 @@ public class Char : MonoBehaviour
     public GameObject Passport;
     public Animator anim;
 
+    public bool isRandom = true;
+
     public int Stamped;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        StartCoroutine(PassportSpawn());
-        GameManager.Instance.currentChar = gameObject.GetComponent<Char>();
+        if (isRandom)
+        {
+            StartCoroutine(PassportSpawn());
+            GameManager.Instance.currentChar = gameObject.GetComponent<Char>();
+        }
+        else
+        {
+            StartCoroutine(RelicSpawn());
+            GameManager.Instance.currentChar = gameObject.GetComponent<Char>();
+        }
     }
 
     // Update is called once per frame
@@ -32,6 +42,18 @@ public class Char : MonoBehaviour
         Passport.transform.position = CharManager.Instance.PassportSpawn.position;
         Passport.transform.localScale = new Vector3(1, 1, 1);
         Passport.GetComponent<Passport>().SetSymbols();
+    }
+
+    IEnumerator RelicSpawn()
+    {
+        yield return new WaitForSeconds(3f);
+        CutSceneManager.Instance.StartCultDialogue();
+        yield return new WaitForSeconds(1f);
+        //var passport =  Instantiate(Passport, passportSpawn.position, passportSpawn.rotation);
+        Passport.GetComponent<Passport>().SmallPassport.SetActive(true);
+        Passport.transform.parent = GameManager.Instance.Canves.transform;
+        Passport.transform.position = CharManager.Instance.PassportSpawn.position;
+        Passport.transform.localScale = new Vector3(1, 1, 1);
     }
 
     public void RecievePassport()

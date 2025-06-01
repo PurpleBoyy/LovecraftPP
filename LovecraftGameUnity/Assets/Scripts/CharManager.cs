@@ -10,6 +10,7 @@ public class CharManager : MonoBehaviour
     public List<Sprite> CharSprites = new List<Sprite>();
     public GameObject PortMask;
     public GameObject CharObject;
+    public GameObject CultPersonObject;
     public Transform PassportSpawn;
 
 
@@ -38,5 +39,12 @@ public class CharManager : MonoBehaviour
         int charSprite = Random.Range(0, CharSprites.Count);
         Debug.Log(charSprite);
         obj.GetComponent<Image>().sprite = CharSprites[charSprite];
+    }
+
+    public void SpawnCultChar()
+    {
+        var obj = Instantiate(CultPersonObject, transform.position, transform.rotation);
+        obj.transform.parent = PortMask.transform;
+        obj.transform.localScale = new Vector3(10, 10, 10);
     }
 }

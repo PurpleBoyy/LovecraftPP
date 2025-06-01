@@ -60,6 +60,11 @@ public class Passport : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     }
 
+    public void CultManBack()
+    {
+        CutSceneManager.Instance.CultManBack();
+    }
+
     public void SetSymbols()
     {
         if (rand > 0)

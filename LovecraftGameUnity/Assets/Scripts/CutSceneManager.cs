@@ -25,6 +25,7 @@ public class CutSceneManager : MonoBehaviour
     public List<DialogueClass> RejectedLines = new List<DialogueClass>();
     public List<DialogueClass> SymbolsAllow = new List<DialogueClass>();
     public List<DialogueClass> SymbolsReject = new List<DialogueClass>();
+    public List<DialogueClass> CultPersonLines = new List<DialogueClass>();
     public List<string> CurrentDialouge = new List<string>();
 
     private void Awake()
@@ -51,6 +52,15 @@ public class CutSceneManager : MonoBehaviour
         CurrentDialouge = StartLines[DialougeIndex].line;
         ContinueDialogue();
         Debug.Log("startDialogue");
+    }
+
+    public void StartCultDialogue()
+    {
+        DialogueBox.SetActive(true);
+        DialougeIndex = Random.Range(0, CultPersonLines.Count);
+        CurrentDialouge = CultPersonLines[DialougeIndex].line;
+        ContinueDialogue();
+        Debug.Log("startCultDialogue");
     }
 
     #region Passport
@@ -122,7 +132,7 @@ public class CutSceneManager : MonoBehaviour
         {
             DialogueBox.SetActive(false);
             lineIndex = 0;
-
+           
             if (GameManager.Instance.isPassportStamped)
             {
                 dialogueOver = true;
@@ -130,6 +140,15 @@ public class CutSceneManager : MonoBehaviour
                 Debug.Log("WALkBack");
             }
         }
+    }
+
+    public void CultManBack()
+    {
+        dialogueOver = true;
+        GameManager.Instance.isPassportStamped = true;
+        GameManager.Instance.currentChar.Stamped = 1;
+        GameManager.Instance.currentChar.Walk();
+        Debug.Log("CultBack");
     }
 
 }
