@@ -91,7 +91,14 @@ public class DaysManager : MonoBehaviour
 
         switch (noOfDays)
         {
-
+            case 1:
+                EndDayObj.SetActive(false);
+                CutSceneManager.Instance.ResetDialogue();
+                GameManager.Instance.isPassportStamped = false;
+                GameManager.Instance.invalidEntries = 0;
+                GameManager.Instance.cultEntries = 0;
+                CharManager.Instance.SpawnPoliceChar();
+                break;
             case 2:
                 EndDayObj.SetActive(false);
                 CutSceneManager.Instance.ResetDialogue();

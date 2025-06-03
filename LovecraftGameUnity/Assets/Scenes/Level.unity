@@ -413,6 +413,7 @@ MonoBehaviour:
   PortMask: {fileID: 1370691579}
   CharObject: {fileID: 7903651394160044653, guid: b3a1c775a5de5714b991e85b33df32e1, type: 3}
   CultPersonObject: {fileID: 3531244124751585084, guid: 075d30645785c834cab3f6c9701c7484, type: 3}
+  PolicePersonObject: {fileID: 4089569392718134351, guid: 2b655e8f8f11bb6428043331b53fd2b5, type: 3}
   PassportSpawn: {fileID: 37469982}
 --- !u!1 &68858736
 GameObject:
@@ -1243,6 +1244,7 @@ RectTransform:
   - {fileID: 1577987770}
   - {fileID: 77724801}
   - {fileID: 1396237613}
+  - {fileID: 1300884021}
   m_Father: {fileID: 1300897297}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -3756,7 +3758,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1300884020}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 1
@@ -3764,11 +3766,11 @@ RectTransform:
   - {fileID: 910985119}
   - {fileID: 1015853971}
   - {fileID: 1679029671}
-  m_Father: {fileID: 1300897297}
+  m_Father: {fileID: 231024019}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 484}
+  m_AnchoredPosition: {x: 229.99998, y: 567}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1300884022
@@ -3927,7 +3929,6 @@ RectTransform:
   - {fileID: 1975691141}
   - {fileID: 1579464946}
   - {fileID: 1050712452}
-  - {fileID: 1300884021}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4760,6 +4761,11 @@ MonoBehaviour:
     - Cult Person 2
     - Cult Person 3
     - Cult Person 4
+  PolicePersonLines:
+  - line:
+    - Police Dialouge 1
+    - Police Dialouge 2
+    - Police Dialouge 3
   CurrentDialouge: []
 --- !u!1 &1435830121
 GameObject:

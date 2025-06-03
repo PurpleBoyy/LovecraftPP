@@ -7,6 +7,7 @@ public class Char : MonoBehaviour
     public Animator anim;
 
     public bool isRandom = true;
+    public int nonRand;
 
     public int Stamped;
 
@@ -20,8 +21,18 @@ public class Char : MonoBehaviour
         }
         else
         {
-            StartCoroutine(RelicSpawn());
-            GameManager.Instance.currentChar = gameObject.GetComponent<Char>();
+            switch (nonRand)
+            {
+                case 1:
+                    StartCoroutine(RelicSpawn());
+                    GameManager.Instance.currentChar = gameObject.GetComponent<Char>();
+                    break;
+                case 2:
+                    StartCoroutine(PoliceTalk());
+                    GameManager.Instance.currentChar = gameObject.GetComponent<Char>();
+                    break;
+            }
+
         }
     }
 
@@ -54,6 +65,15 @@ public class Char : MonoBehaviour
         Passport.transform.parent = GameManager.Instance.Canves.transform;
         Passport.transform.position = CharManager.Instance.PassportSpawn.position;
         Passport.transform.localScale = new Vector3(1, 1, 1);
+    }
+
+    IEnumerator PoliceTalk()
+    {
+        Debug.Log("Polis");
+        yield return new WaitForSeconds(3f);
+        CutSceneManager.Instance.StartPoliceDialogue();
+        GameManager.Instance.isPassportStamped = true;
+        Stamped = 1;
     }
 
     public void RecievePassport()
