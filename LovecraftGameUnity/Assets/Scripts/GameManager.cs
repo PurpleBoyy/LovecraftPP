@@ -24,9 +24,11 @@ public class GameManager : MonoBehaviour
     public int invalidEntries;
     public int cultEntries;
     public int insanity;
+
     private void Awake()
     {
         Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

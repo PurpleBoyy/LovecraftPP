@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 public class HandChopScript : MonoBehaviour
 {
     public static HandChopScript Instance;
@@ -25,6 +26,18 @@ public class HandChopScript : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void EndRitual()
+    {
+        StartCoroutine(LoadMainScene());
+    }
+
+    IEnumerator LoadMainScene()
+    {
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("Level");
+
     }
 
     public void StartCutting(int i)

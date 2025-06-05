@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class DaysManager : MonoBehaviour
@@ -126,6 +127,15 @@ public class DaysManager : MonoBehaviour
         {
            
         }
+    }
+
+    public void Ritual()
+    {
+        CutSceneManager.Instance.ResetDialogue();
+        GameManager.Instance.isPassportStamped = false;
+        GameManager.Instance.invalidEntries = 0;
+        GameManager.Instance.cultEntries = 0;
+        SceneManager.LoadScene("Ritual");
     }
 
 

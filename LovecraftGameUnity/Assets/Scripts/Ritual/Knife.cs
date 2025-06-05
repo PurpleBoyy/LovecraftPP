@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 public class Knife : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
 
@@ -34,8 +37,11 @@ public class Knife : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
             Destroy(HandChopScript.Instance.Fingers[HandChopScript.Instance.FingIndex]);
             Destroy(gameObject);
             HandChopScript.Instance.isCutting = false;
+            HandChopScript.Instance.EndRitual();
         }
     }
+
+
 
     public void OnBeginDrag(PointerEventData eventData)
     {

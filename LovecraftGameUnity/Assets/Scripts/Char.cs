@@ -83,8 +83,10 @@ public class Char : MonoBehaviour
             Passport.SetActive(false);
             Passport.transform.parent = gameObject.transform;
             CutSceneManager.Instance.DialogueBox.SetActive(true);
+            GameManager.Instance.insanity += 5;
+            GameManager.Instance.insanitySlider.value = GameManager.Instance.insanity;
 
-            if(GameManager.Instance.isPassportValid == true)
+            if (GameManager.Instance.isPassportValid == true)
             {
                 
 
@@ -101,7 +103,7 @@ public class Char : MonoBehaviour
                     CutSceneManager.Instance.StartAllowDialogue();
                     if (GameManager.Instance.isCult)
                     {
-                        GameManager.Instance.insanity += 10;
+                        GameManager.Instance.insanity += 5;
                         GameManager.Instance.insanitySlider.value = GameManager.Instance.insanity;
                         GameManager.Instance.cultEntries++;
                     }
@@ -117,7 +119,7 @@ public class Char : MonoBehaviour
                     CutSceneManager.Instance.StartAllowDialogue();
                     if (GameManager.Instance.isCult)
                     {
-                        GameManager.Instance.insanity += 10;
+                        GameManager.Instance.insanity += 5;
                         GameManager.Instance.insanitySlider.value = GameManager.Instance.insanity;
                         GameManager.Instance.cultEntries++;
                     }
