@@ -11,6 +11,8 @@ public class DaysManager : MonoBehaviour
 
     public GameObject EndDayObj;
     public GameObject EndWeekObj;
+    public GameObject RitualObj;
+    public GameObject MainObj;
 
     public TextMeshProUGUI SavingsTxt;
     public TextMeshProUGUI SalaryTxt;
@@ -131,11 +133,9 @@ public class DaysManager : MonoBehaviour
 
     public void Ritual()
     {
-        CutSceneManager.Instance.ResetDialogue();
-        GameManager.Instance.isPassportStamped = false;
-        GameManager.Instance.invalidEntries = 0;
-        GameManager.Instance.cultEntries = 0;
-        SceneManager.LoadScene("Ritual");
+        GameManager.Instance.currentChar.GetComponent<Char>().Die();
+        RitualObj.SetActive(true);
+        MainObj.SetActive(false);
     }
 
 

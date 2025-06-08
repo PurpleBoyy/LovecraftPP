@@ -36,7 +36,8 @@ public class HandChopScript : MonoBehaviour
     IEnumerator LoadMainScene()
     {
         yield return new WaitForSeconds(3);
-        SceneManager.LoadScene("Level");
+        DaysManager.Instance.RitualObj.SetActive(false);
+        DaysManager.Instance.MainObj.SetActive(true);
 
     }
 

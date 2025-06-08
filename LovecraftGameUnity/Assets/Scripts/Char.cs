@@ -1,10 +1,14 @@
 using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;
 using System.Collections;
 
 public class Char : MonoBehaviour
 {
     public GameObject Passport;
+    public GameObject Lightning;
     public Animator anim;
+    public SpriteClass Sprites;
 
     public bool isRandom = true;
     public int nonRand;
@@ -45,6 +49,7 @@ public class Char : MonoBehaviour
     IEnumerator PassportSpawn()
     {
         yield return new WaitForSeconds(3f);
+        CultChangeAnim();
         CutSceneManager.Instance.StartDialogue();
         yield return new WaitForSeconds(1f);
         //var passport =  Instantiate(Passport, passportSpawn.position, passportSpawn.rotation);
@@ -177,5 +182,30 @@ public class Char : MonoBehaviour
         CutSceneManager.Instance.ResetDialogue();
         GameManager.Instance.isPassportStamped = false;
         Destroy(gameObject);
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
+
+    public void CultChangeAnim()
+    {
+        StartCoroutine(CultChangeCor());
+    }
+
+    IEnumerator CultChangeCor()
+    {
+        CharManager.Instance.Lightning.SetActive(true);
+        transform.DOScale(12f, 0.5f);
+        yield return new WaitForSeconds(0.5f);
+        GetComponent<Image>().sprite = Sprites.AllSprites[1];
+        transform.DOScale(10, 1);
+        yield return new WaitForSeconds(1);
+        transform.DOScale(12f, 0.5f);
+        yield return new WaitForSeconds(0.5f);
+        CharManager.Instance.Lightning.SetActive(false);
+        GetComponent<Image>().sprite = Sprites.AllSprites[2];
+        transform.DOScale(10, 1);
     }
 }

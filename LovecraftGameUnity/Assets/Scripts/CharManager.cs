@@ -7,8 +7,9 @@ public class CharManager : MonoBehaviour
 {
     public static CharManager Instance;
 
-    public List<Sprite> CharSprites = new List<Sprite>();
+    public List<SpriteClass> CharSpritesLists = new List<SpriteClass>();
     public GameObject PortMask;
+    public GameObject Lightning;
     public GameObject CharObject;
     public GameObject CultPersonObject;
     public GameObject PolicePersonObject;
@@ -38,9 +39,11 @@ public class CharManager : MonoBehaviour
         var obj = Instantiate(CharObject, transform.position, transform.rotation);
         obj.transform.parent = PortMask.transform;
         obj.transform.localScale = new Vector3(10, 10, 10);
-        int charSprite = Random.Range(0, CharSprites.Count);
+        int charSprite = Random.Range(0, CharSpritesLists.Count);
         Debug.Log(charSprite);
-        obj.GetComponent<Image>().sprite = CharSprites[charSprite];
+        obj.GetComponent<Image>().sprite = CharSpritesLists[charSprite].AllSprites[0];
+        obj.GetComponent<Char>().Sprites = CharSpritesLists[charSprite];
+        Debug.Log("SpawnChar");
     }
 
     public void SpawnCultChar()
@@ -56,4 +59,10 @@ public class CharManager : MonoBehaviour
         obj.transform.parent = PortMask.transform;
         obj.transform.localScale = new Vector3(10, 10, 10);
     }
+}
+
+[System.Serializable]
+public class SpriteClass
+{
+    public List<Sprite> AllSprites = new List<Sprite>();
 }

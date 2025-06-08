@@ -37,6 +37,7 @@ public class Knife : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
             Destroy(HandChopScript.Instance.Fingers[HandChopScript.Instance.FingIndex]);
             Destroy(gameObject);
             HandChopScript.Instance.isCutting = false;
+            GameManager.Instance.insanity -= 20;
             HandChopScript.Instance.EndRitual();
         }
     }
