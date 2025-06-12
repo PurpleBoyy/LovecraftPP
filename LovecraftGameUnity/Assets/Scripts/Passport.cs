@@ -62,6 +62,7 @@ public class Passport : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void CultManBack()
     {
+        GameManager.Instance.LightButton.SetActive(true);
         CutSceneManager.Instance.CultManBack();
     }
 

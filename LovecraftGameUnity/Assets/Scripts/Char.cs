@@ -49,7 +49,6 @@ public class Char : MonoBehaviour
     IEnumerator PassportSpawn()
     {
         yield return new WaitForSeconds(3f);
-        CultChangeAnim();
         CutSceneManager.Instance.StartDialogue();
         yield return new WaitForSeconds(1f);
         //var passport =  Instantiate(Passport, passportSpawn.position, passportSpawn.rotation);
@@ -97,10 +96,21 @@ public class Char : MonoBehaviour
 
                 if (GameManager.Instance.canCharPass == false) // Check if a valid passport is denied
                 {
-                    Stamped = 1;
-                    CutSceneManager.Instance.isAllowed = false;
-                    GameManager.Instance.invalidEntries++;
-                    CutSceneManager.Instance.StartRejectDialogue();
+
+
+                    if (GameManager.Instance.insanity > 50 && GameManager.Instance.isCult)
+                    {
+                        CultChangeAnim();
+                        CutSceneManager.Instance.StartCultChangeDialogue();
+                        GameManager.Instance.RitualButton.SetActive(true);
+                    }
+                    else
+                    {
+                        Stamped = 1;
+                        CutSceneManager.Instance.isAllowed = false;
+                        GameManager.Instance.invalidEntries++;
+                        CutSceneManager.Instance.StartRejectDialogue();
+                    }
                 }
                 else
                 {
@@ -132,7 +142,17 @@ public class Char : MonoBehaviour
                 else
                 {
                     Stamped = 1;
-                    CutSceneManager.Instance.StartRejectDialogue();
+
+                    if (GameManager.Instance.insanity > 50 && GameManager.Instance.isCult)
+                    {
+                        CultChangeAnim();
+                        CutSceneManager.Instance.StartCultChangeDialogue();
+                        GameManager.Instance.RitualButton.SetActive(true);
+                    }
+                    else
+                    {
+                        CutSceneManager.Instance.StartRejectDialogue();
+                    }
                 }
             }
 

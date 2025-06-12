@@ -1112,7 +1112,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &191337742
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3287,6 +3287,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Canves: {fileID: 1579464945}
   Light: {fileID: 1050712451}
+  LightButton: {fileID: 1396237612}
+  RitualButton: {fileID: 191337741}
   CheckList: {fileID: 2065061035}
   insanitySlider: {fileID: 1300884022}
   symb: []
@@ -3298,7 +3300,7 @@ MonoBehaviour:
   playerSavings: 100
   invalidEntries: 0
   cultEntries: 0
-  insanity: 25
+  insanity: 50
 --- !u!114 &733585696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6093,7 +6095,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1396237613
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6396,6 +6398,17 @@ MonoBehaviour:
     - Cult Person 2
     - Cult Person 3
     - Cult Person 4
+  CultChangeLines:
+  - line:
+    - CultChange1 -1
+    - CultChange1 -2
+  - line:
+    - CultChange2 -1
+    - CultChange2 -2
+    - CultChange2 -3
+  - line:
+    - CultChange3 -1
+    - CultChange3 -2
   PolicePersonLines:
   - line:
     - Police Dialouge 1
@@ -7354,7 +7367,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1682777622
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8660,7 +8673,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2065061036
 RectTransform:
   m_ObjectHideFlags: 0

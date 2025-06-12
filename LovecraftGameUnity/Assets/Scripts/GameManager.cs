@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject Canves;
     public GameObject Light;
+    public GameObject LightButton;
+    public GameObject RitualButton;
     public GameObject CheckList;
     public Slider insanitySlider;
 

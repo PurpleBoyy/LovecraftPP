@@ -26,6 +26,7 @@ public class CutSceneManager : MonoBehaviour
     public List<DialogueClass> SymbolsAllow = new List<DialogueClass>();
     public List<DialogueClass> SymbolsReject = new List<DialogueClass>();
     public List<DialogueClass> CultPersonLines = new List<DialogueClass>();
+    public List<DialogueClass> CultChangeLines = new List<DialogueClass>();
     public List<DialogueClass> PolicePersonLines = new List<DialogueClass>();
     public List<string> CurrentDialouge = new List<string>();
 
@@ -72,6 +73,15 @@ public class CutSceneManager : MonoBehaviour
         CurrentDialouge = PolicePersonLines[DialougeIndex].line;
         ContinueDialogue();
         Debug.Log("startPolisDialogue");
+    }
+
+    public void StartCultChangeDialogue()
+    {
+        DialogueBox.SetActive(true);
+        DialougeIndex = Random.Range(0, CultChangeLines.Count);
+        CurrentDialouge = CultChangeLines[DialougeIndex].line;
+        ContinueDialogue();
+        Debug.Log("startCultDialogue");
     }
 
     #region Passport
