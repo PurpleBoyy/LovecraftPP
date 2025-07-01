@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 public class Passport : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
 
@@ -9,6 +10,7 @@ public class Passport : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public GameObject BigPassport;
     public GameObject Symbols;
     public Char charScrpit;
+    public TextMeshProUGUI invalidReason;
 
     public int rand;
 
@@ -49,6 +51,7 @@ public class Passport : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             BigPassport.GetComponent<Image>().color = Color.cyan;
             CutSceneManager.Instance.isAllowed = true;
             GameManager.Instance.isPassportValid = true;
+            invalidReason.enabled = false;
         }
         else
         {
@@ -56,6 +59,24 @@ public class Passport : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             BigPassport.GetComponent<Image>().color = Color.magenta;
             CutSceneManager.Instance.isAllowed = false;
             GameManager.Instance.isPassportValid = false;
+
+            int reason = Random.Range(0, 3);
+
+            switch (reason)
+            {
+                case 0:
+                    invalidReason.text = "Country";
+                    GameManager.Instance.invalidReason = invalidReason.text;
+                    break;
+                case 1:
+                    invalidReason.text = "Date";
+                    GameManager.Instance.invalidReason = invalidReason.text;
+                    break;
+                case 2:
+                    invalidReason.text = "Pic";
+                    GameManager.Instance.invalidReason = invalidReason.text;
+                    break;
+            }
         }
 
     }

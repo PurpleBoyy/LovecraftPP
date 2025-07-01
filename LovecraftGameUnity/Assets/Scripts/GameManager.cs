@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public int invalidEntries;
     public int cultEntries;
     public int insanity;
+    public string invalidReason; 
 
     private void Awake()
     {

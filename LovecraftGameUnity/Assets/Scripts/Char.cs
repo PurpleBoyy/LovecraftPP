@@ -20,7 +20,7 @@ public class Char : MonoBehaviour
     {
         if (isRandom)
         {
-            StartCoroutine(PassportSpawn());
+            StartCoroutine(StartDialougeCor());
             GameManager.Instance.currentChar = gameObject.GetComponent<Char>();
         }
         else
@@ -46,10 +46,20 @@ public class Char : MonoBehaviour
 
     }
 
-    IEnumerator PassportSpawn()
+    public void SpawnPassportChar()
+    {
+        StartCoroutine(PassportSpawn());
+    }
+
+    IEnumerator StartDialougeCor()
     {
         yield return new WaitForSeconds(3f);
         CutSceneManager.Instance.StartDialogue();
+    }
+
+    IEnumerator PassportSpawn()
+    {
+
         yield return new WaitForSeconds(1f);
         //var passport =  Instantiate(Passport, passportSpawn.position, passportSpawn.rotation);
         Passport.GetComponent<Passport>().SmallPassport.SetActive(true);
@@ -183,7 +193,7 @@ public class Char : MonoBehaviour
         Passport.SetActive(false);
         Passport.transform.parent = gameObject.transform;
 
-        if (DaysManager.Instance.noOfChecks < 1)
+        if (DaysManager.Instance.noOfChecks < DaysManager.Instance.totalNoOfChecks)
         {
             StartCoroutine(SpawnCharCor());
             DaysManager.Instance.noOfChecks++;

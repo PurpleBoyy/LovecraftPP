@@ -23,12 +23,16 @@ public class CutSceneManager : MonoBehaviour
     public List<DialogueClass> StartLines = new List<DialogueClass>();
     public List<DialogueClass> AllowedLines = new List<DialogueClass>();
     public List<DialogueClass> RejectedLines = new List<DialogueClass>();
-    public List<DialogueClass> SymbolsAllow = new List<DialogueClass>();
-    public List<DialogueClass> SymbolsReject = new List<DialogueClass>();
     public List<DialogueClass> CultPersonLines = new List<DialogueClass>();
-    public List<DialogueClass> CultChangeLines = new List<DialogueClass>();
+    public List<DialogueClass> CultChangeLines = new List<DialogueClass>(); // Morphing into a monster
     public List<DialogueClass> PolicePersonLines = new List<DialogueClass>();
     public List<string> CurrentDialouge = new List<string>();
+
+    [Header("CheckLines")]
+    public List<DialogueClass> SymbolsCheck = new List<DialogueClass>();
+     public List<DialogueClass> PassportCheck = new List<DialogueClass>();
+     public List<DialogueClass> CountryCheck = new List<DialogueClass>();
+     public List<DialogueClass> DateCheck = new List<DialogueClass>();
 
     private void Awake()
     {
@@ -104,33 +108,39 @@ public class CutSceneManager : MonoBehaviour
 
     #region Symbols
 
-    public void StartSymbolsDialouge()
-    {
-        if (GameManager.Instance.isCult)
-        {
-            StartSymbolRejectDialouge();
-        }
-        else
-        {
-            StartSymbolAllowDialouge();
-        }
-    }
-
-    public void StartSymbolAllowDialouge()
+    public void StartSymbolCheckDialouge()
     {
         GameManager.Instance.CheckList.SetActive(false);
         DialogueBox.SetActive(true);
-        DialougeIndex = Random.Range(0, SymbolsAllow.Count);
-        CurrentDialouge = SymbolsAllow[DialougeIndex].line;
+        DialougeIndex = Random.Range(0, SymbolsCheck.Count);
+        CurrentDialouge = SymbolsCheck[DialougeIndex].line;
         ContinueDialogue();
     }
 
-    public void StartSymbolRejectDialouge()
+    public void StartPassportCheckDialouge()
     {
         GameManager.Instance.CheckList.SetActive(false);
         DialogueBox.SetActive(true);
-        DialougeIndex = Random.Range(0, SymbolsReject.Count);
-        CurrentDialouge = SymbolsReject[DialougeIndex].line;
+        DialougeIndex = Random.Range(0, PassportCheck.Count);
+        CurrentDialouge = PassportCheck[DialougeIndex].line;
+        ContinueDialogue();
+    }
+
+    public void StartCountryCheckDialouge()
+    {
+        GameManager.Instance.CheckList.SetActive(false);
+        DialogueBox.SetActive(true);
+        DialougeIndex = Random.Range(0, CountryCheck.Count);
+        CurrentDialouge = CountryCheck[DialougeIndex].line;
+        ContinueDialogue();
+    }
+
+    public void StartDateCheckDialouge()
+    {
+        GameManager.Instance.CheckList.SetActive(false);
+        DialogueBox.SetActive(true);
+        DialougeIndex = Random.Range(0, DateCheck.Count);
+        CurrentDialouge = DateCheck[DialougeIndex].line;
         ContinueDialogue();
     }
     #endregion
@@ -153,12 +163,20 @@ public class CutSceneManager : MonoBehaviour
         {
             DialogueBox.SetActive(false);
             lineIndex = 0;
-           
+
             if (GameManager.Instance.isPassportStamped)
             {
                 dialogueOver = true;
                 GameManager.Instance.currentChar.Walk();
                 Debug.Log("WALkBack");
+            }
+            else
+            {
+                if(CurrentDialouge == StartLines[DialougeIndex].line)
+                {
+                    GameManager.Instance.currentChar.SpawnPassportChar();
+                    Debug.Log("SpawnPassport");
+                }
             }
         }
     }

@@ -13,6 +13,7 @@ public class DaysManager : MonoBehaviour
     public GameObject EndWeekObj;
     public GameObject RitualObj;
     public GameObject MainObj;
+    public GameObject NewsPaper;
 
     public TextMeshProUGUI SavingsTxt;
     public TextMeshProUGUI SalaryTxt;
@@ -24,7 +25,9 @@ public class DaysManager : MonoBehaviour
     public TextMeshProUGUI TotalTxt;
 
     public int noOfChecks;
+    public int totalNoOfChecks;
     public int noOfDays;
+    public int totalNoOfDays;
 
     public bool food;
 
@@ -87,8 +90,14 @@ public class DaysManager : MonoBehaviour
         TotalTxt.text = "Savings: " + GameManager.Instance.playerSavings;
     }
 
+    public void NewsaperOpen()
+    {
+        NewsPaper.SetActive(true);
+    }
+
     public void StartNextDay()
     {
+        NewsPaper.SetActive(false);
         noOfChecks = 0;
         noOfDays++;
 
@@ -121,7 +130,7 @@ public class DaysManager : MonoBehaviour
                 break;
         }
 
-        if(noOfDays >= 4)
+        if(noOfDays >= totalNoOfDays)
         {
             EndWeekObj.SetActive(true);
         }
